@@ -1,5 +1,3 @@
-<p align="center">
-  ![8keys](/source/images/logo.png?raw=true)
-</p>
+![8keys](https://raw.githubusercontent.com/fatech-dev/8keys-api-docs/master/source/images/logo.png)
 
 API Docs for 8keys, built with [Slate](https://github.com/slatedocs/slate).
