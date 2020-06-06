@@ -1,0 +1,74 @@
+---
+title: API Reference
+
+language_tabs: # must be one of https://git.io/vQNgJ
+  - php: PHP with Guzzle
+
+toc_footers:
+  - <a href='https://8keys.fatech.dev/'>8keys API Developer Portal</a>
+  - <a href='https://8keys.de/'>Copyright (c) 2020 8keys</a>
+
+includes:
+  - products.md.erb
+  - orders.md.erb
+  - user.md.erb
+  - errors.md.erb
+
+search: true
+---
+
+# Introduction
+
+Welcome to the 8keys API Docs! You can use our API to get information on your balance, products and orders.
+
+In the dark area to the right you will find a sample implementation with PHP and [Guzzle](http://docs.guzzlephp.org/en/stable/).
+
+# Endpoints
+
+### Development
+`<%= config[:dev_endpoint] %>`
+
+### Production
+`<%= config[:prod_endpoint] %>`
+
+# Authentication
+
+### Generate API keys
+
+To (re-)generate your API keys, go to **My Stores** and click on <%= image_tag "images/key-btn.png" %> in the **Actions** column. Confirm the procedure and be sure to note your api keys down in a safe place!
+
+<%= image_tag "images/api-keys.png" %>
+
+### Authorization
+
+> Client implementation (used in the following code examples)
+
+```php
+$api_client = new \GuzzleHttp\Client([
+    'base_uri' => '<%= config[:dev_endpoint] %>/',
+    'timeout'  => 60.0,
+    'http_errors' => false,
+    'headers'  => [
+        'Authorization' => 'Bearer EXAMPLE-API-KEY',
+        'Accept' => 'application/json',
+        'Content-Type' => 'application/json'
+    ],
+]);
+```
+The API key must be included in all API requests to the server in a header that looks like the following:
+
+`Authorization: Bearer EXAMPLE-API-KEY`
+
+<aside class="notice">
+You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
+</aside>
+
+# Request / Response Format
+
+Some general information:
+
+* Content-Type: `application/json` or `application/x-www-form-urlencoded` (we strongly recommend using json!)
+
+* Response Format: `JSON`, make sure to add `Accept: application/json` to all your API requests to the server!
+
+* DateTime Format: `YYYY-MM-dd HH:mm:ss`, f.e. `2020-04-03 18:04:00`

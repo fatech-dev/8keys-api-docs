@@ -1,0 +1,89 @@
+# Products
+
+## Get All Products
+
+```php
+$api_client->get('products', [
+  'query' => [
+    'page' => 4,
+    'limit' => 50,
+    'name' => 'Win',
+    'productIds' => [ 1, 4, 7, 8 ],
+    'updatedSince' => '2000-04-03 00:00:00'
+  ]
+]);
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "total_count": 350,
+  "result": [
+    {
+      "id": 1,
+      "name": "Anno 2070 Uplay CD Key",
+      "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy.",
+      "platform": "Uplay",
+      "language": "German, English, French, Spanish, Czech, Polish, Russian, Italian",
+      "region": "Region free",
+      "quantity": 4129,
+      "price_cents": 615,
+      "updated_at": "2020-04-24 13:54:18"
+    },
+    [...]
+  ]
+}
+```
+
+This endpoint retrieves all products.
+
+### HTTP Request
+
+`GET /products`
+
+### Query Parameters
+
+Parameter | Type | Default | Required | Description
+--------- | ---- | ------- | -------- | -----------
+page | int | 1 | false | Current page (>= 1)
+limit | int | 10 | false | Limit product count (between 1 and 100)
+name | string | NULL | false | Filter by product name (\*wildcard*)
+productIds | array of int | NULL | false | Filter by product ids (max. 100 ids)
+updatedSince | datetime | NULL | false | Get products updated since datetime
+
+## Get Specific Product
+
+```php
+$api_client->get('products/1');
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "result": {
+    "id": 1,
+    "name": "Anno 2070 Uplay CD Key",
+    "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy.",
+    "platform": "Uplay",
+    "language": "German, English, French, Spanish, Czech, Polish, Russian, Italian",
+    "region": "Region free",
+    "quantity": 4129,
+    "price_cents": 615,
+    "updated_at": "2020-04-24 13:54:18"
+  }
+}
+```
+
+This endpoint retrieves a specific product.
+
+### HTTP Request
+
+`GET /products/{ID}`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID | The ID of the product to retrieve

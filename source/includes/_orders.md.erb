@@ -1,0 +1,133 @@
+# Orders
+
+## Get All Orders
+
+```php
+$api_client->get('orders', [
+  'query' => [
+    'page' => 4,
+    'limit' => 50,
+    'createdAfter' => '2000-04-03 00:00:00'
+  ]
+]);
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "total_count": 12,
+  "result": [
+    {
+      "id": 1,
+      "transaction_id": 1,
+      "status": "done",
+      "created_at": "2020-04-07 20:12:36"
+    },
+    [...]
+  ]
+}
+```
+
+This endpoint retrieves all orders (without product keys).
+
+### HTTP Request
+
+`GET /orders`
+
+### Query Parameters
+
+Parameter | Type | Default | Required | Description
+--------- | ---- | ------- | -------- | -----------
+page | int | 1 | false | Current page (>= 1)
+limit | int | 10 | false | Limit order count (between 1 and 100)
+createdAfter | datetime | NULL | false | Get orders created after datetime
+
+## Get Specific Order
+
+```php
+$api_client->get('orders/1');
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "id": 1,
+  "transaction_id": 1,
+  "status": "done",
+  "created_at": "2020-04-07 20:12:36",
+  "product_keys": [
+    {
+      "product_id": 1,
+      "type": "text/plain",
+      "code": "0000-0000-0000-0000"
+    },
+    [...]
+  ],
+}
+```
+
+This endpoint retrieves a specific order.
+
+### HTTP Request
+
+`GET /orders/{ID}`
+
+### URL Parameters
+
+Parameter | Description
+--------- | -----------
+ID | The ID of the order to retrieve
+
+<aside class="notice">
+The product keys will only be included in orders with status <code>done</code>
+</aside>
+
+## Place Order
+
+```php
+$api_client->post('orders', [
+  'json' => [
+    'products' => [
+      [
+        'product_id' => 1,
+        'quantity' => 4,
+        'price_cents' => 200
+      ],
+      [...]
+    ]
+  ]
+]);
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "total_count": 12,
+  "result": [
+    {
+      "id": 1,
+      "transaction_id": 1,
+      "status": "done",
+      "created_at": "2020-04-07 20:12:36"
+    },
+    [...]
+  ]
+}
+```
+
+This endpoint places a new order.
+
+### HTTP Request
+
+`POST /orders`
+
+### Body Parameters
+
+Parameter | Type | Default | Required | Description
+--------- | ---- | ------- | -------- | -----------
+page | int | 1 | false | Current page (>= 1)
+limit | int | 10 | false | Limit order count (between 1 and 100)
+createdAfter | datetime | NULL | false | Get orders created after datetime

@@ -1,3 +1,9 @@
+# Global Variables
+set :dev_endpoint, 'https://8keys.fatech.dev/api/d/v1'
+set :prod_endpoint, 'https://8keys.fatech.dev/api/p/v1'
+
+
+
 # Unique header generation
 require './lib/unique_head.rb'
 
