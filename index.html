@@ -280,7 +280,7 @@
           </li>
       </ul>
         <ul class="toc-footer">
-            <li><a href='https://8keys.fatech.dev/'>8keys API Developer Portal</a></li>
+            <li><a href='https://api.8keys.de/'>8keys API Developer Portal</a></li>
             <li><a href='https://8keys.de/'>Copyright (c) 2020 8keys</a></li>
         </ul>
     </div>
@@ -319,9 +319,9 @@
 </tr>
 </tbody></table>
 <h2 id='endpoints'>Endpoints</h2><h3 id='development'>Development</h3>
-<p><code>https://8keys.fatech.dev/api/d/v1</code></p>
+<p><code>https://api.8keys.de/d/v1</code></p>
 <h3 id='production'>Production</h3>
-<p><code>https://8keys.fatech.dev/api/p/v1</code></p>
+<p><code>https://api.8keys.de/p/v1</code></p>
 <h2 id='authentication'>Authentication</h2><h3 id='generate-api-keys'>Generate API keys</h3>
 <p>To (re-)generate your API keys, go to <strong>My Stores</strong> and click on <img src="images/key-btn-6125194c.png" alt="" /> in the <strong>Actions</strong> column. Confirm the procedure and be sure to note your api keys down in a safe place!</p>
 
@@ -331,7 +331,7 @@
 <p>Client implementation (used in the following code examples)</p>
 </blockquote>
 <div class="highlight"><pre class="highlight php tab-php"><code><span class="nv">$api_client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\GuzzleHttp\Client</span><span class="p">([</span>
-    <span class="s1">'base_uri'</span> <span class="o">=&gt;</span> <span class="s1">'https://8keys.fatech.dev/api/d/v1/'</span><span class="p">,</span>
+    <span class="s1">'base_uri'</span> <span class="o">=&gt;</span> <span class="s1">'https://api.8keys.de/d/v1/'</span><span class="p">,</span>
     <span class="s1">'timeout'</span>  <span class="o">=&gt;</span> <span class="mf">60.0</span><span class="p">,</span>
     <span class="s1">'http_errors'</span> <span class="o">=&gt;</span> <span class="kc">false</span><span class="p">,</span>
     <span class="s1">'headers'</span>  <span class="o">=&gt;</span> <span class="p">[</span>
