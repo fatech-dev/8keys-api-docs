@@ -1,6 +1,6 @@
 # Global Variables
-set :dev_endpoint, 'https://8keys.fatech.dev/api/d/v1'
-set :prod_endpoint, 'https://8keys.fatech.dev/api/p/v1'
+set :dev_endpoint, 'https://api.8keys.de/d/v1'
+set :prod_endpoint, 'https://api.8keys.de/p/v1'
 
 
 
