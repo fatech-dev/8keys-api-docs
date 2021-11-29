@@ -197,9 +197,96 @@
   color: #f92672;
 }
     </style>
-    <link href="stylesheets/screen-52d28e6e.css" rel="stylesheet" media="screen" />
-    <link href="stylesheets/print-c427a123.css" rel="stylesheet" media="print" />
-      <script src="javascripts/all-c5541673.js"></script>
+    <style media="print">
+      * {
+        -webkit-transition:none!important;
+        transition:none!important;
+      }
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #586e75;
+}
+.highlight .err {
+  color: #002b36;
+  background-color: #dc322f;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cpf, .highlight .c1, .highlight .cs {
+  color: #657b83;
+}
+.highlight .cp {
+  color: #b58900;
+}
+.highlight .nt {
+  color: #b58900;
+}
+.highlight .o, .highlight .ow {
+  color: #93a1a1;
+}
+.highlight .p, .highlight .pi {
+  color: #93a1a1;
+}
+.highlight .gi {
+  color: #859900;
+}
+.highlight .gd {
+  color: #dc322f;
+}
+.highlight .gh {
+  color: #268bd2;
+  background-color: #002b36;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #6c71c4;
+}
+.highlight .kc {
+  color: #cb4b16;
+}
+.highlight .kt {
+  color: #cb4b16;
+}
+.highlight .kd {
+  color: #cb4b16;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .dl, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #859900;
+}
+.highlight .sa {
+  color: #6c71c4;
+}
+.highlight .sr {
+  color: #2aa198;
+}
+.highlight .si {
+  color: #d33682;
+}
+.highlight .se {
+  color: #d33682;
+}
+.highlight .nn {
+  color: #b58900;
+}
+.highlight .nc {
+  color: #b58900;
+}
+.highlight .no {
+  color: #b58900;
+}
+.highlight .na {
+  color: #268bd2;
+}
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx {
+  color: #859900;
+}
+.highlight .ss {
+  color: #859900;
+}
+    </style>
+    <link href="stylesheets/screen-c63e83ee.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all-b12a2749.js"></script>
+
   </head>
 
   <body class="index" data-languages="[&quot;php&quot;]">
@@ -319,19 +406,19 @@
 </tr>
 </tbody></table>
 <h2 id='endpoints'>Endpoints</h2><h3 id='development'>Development</h3>
-<p><code>https://api.8keys.de/d/v1</code></p>
+<p><code>&lt;%= config[:dev_endpoint] %&gt;</code></p>
 <h3 id='production'>Production</h3>
-<p><code>https://api.8keys.de/p/v1</code></p>
+<p><code>&lt;%= config[:prod_endpoint] %&gt;</code></p>
 <h2 id='authentication'>Authentication</h2><h3 id='generate-api-keys'>Generate API keys</h3>
-<p>To (re-)generate your API keys, go to <strong>My Stores</strong> and click on <img src="images/key-btn-6125194c.png" alt="" /> in the <strong>Actions</strong> column. Confirm the procedure and be sure to note your api keys down in a safe place!</p>
+<p>To (re-)generate your API keys, go to <strong>My Stores</strong> and click on &lt;%= image_tag &quot;images/key-btn.png&quot; %&gt; in the <strong>Actions</strong> column. Confirm the procedure and be sure to note your api keys down in a safe place!</p>
 
-<p><img src="images/api-keys-4f7a2e36.png" alt="" /></p>
+<p>&lt;%= image_tag &quot;images/api-keys.png&quot; %&gt;</p>
 <h3 id='authorization'>Authorization</h3>
 <blockquote>
 <p>Client implementation (used in the following code examples)</p>
 </blockquote>
-<div class="highlight"><pre class="highlight php tab-php"><code><span class="nv">$api_client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\GuzzleHttp\Client</span><span class="p">([</span>
-    <span class="s1">'base_uri'</span> <span class="o">=&gt;</span> <span class="s1">'https://api.8keys.de/d/v1/'</span><span class="p">,</span>
+<div class="highlight"><pre class="highlight php tab-php"><code><span class="nv">$api_client</span> <span class="o">=</span> <span class="k">new</span> <span class="err">\</span><span class="nf">GuzzleHttp\Client</span><span class="p">([</span>
+    <span class="s1">'base_uri'</span> <span class="o">=&gt;</span> <span class="s1">'&lt;%= config[:dev_endpoint] %&gt;/'</span><span class="p">,</span>
     <span class="s1">'timeout'</span>  <span class="o">=&gt;</span> <span class="mf">60.0</span><span class="p">,</span>
     <span class="s1">'http_errors'</span> <span class="o">=&gt;</span> <span class="kc">false</span><span class="p">,</span>
     <span class="s1">'headers'</span>  <span class="o">=&gt;</span> <span class="p">[</span>
@@ -349,7 +436,7 @@
 You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
 </aside>
 <h2 id='rate-limit'>Rate Limit</h2>
-<p>To protect our servers from too many requests, we have a rate limit of <strong>60 requests per minute</strong>. The rate limit applies to each environment separately.</p>
+<p>To protect our servers from too many requests, we have a rate limit of <strong>120 requests per minute</strong> (production) and <strong>60 requests per minute</strong> (sandbox). The rate limit applies to each environment separately.</p>
 
 <p>You can check the current rate limit status via the response headers:</p>
 
@@ -407,6 +494,10 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
 <td>You tried to access a resource with an invalid method.</td>
 </tr>
 <tr>
+<td>409 Duplicate</td>
+<td>An order with the given external id already exists.</td>
+</tr>
+<tr>
 <td>422 Unprocessable Entity</td>
 <td>Your request query / body data is invalid (see response body for more details).</td>
 </tr>
@@ -430,8 +521,12 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
 <td>1.0.0</td>
 <td>Initial version</td>
 </tr>
+<tr>
+<td>1.0.1</td>
+<td>Added order external id and more descriptions</td>
+</tr>
 </tbody></table>
-<h1 id='products'>Products</h1><h2 id='get-all-products'>Get All Products</h2><div class="highlight"><pre class="highlight php tab-php"><code><span class="nv">$api_client</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'products'</span><span class="p">,</span> <span class="p">[</span>
+<h1 id='products'>Products</h1><h2 id='get-all-products'>Get All Products</h2><div class="highlight"><pre class="highlight php tab-php"><code><span class="nv">$api_client</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'products'</span><span class="p">,</span> <span class="p">[</span>
   <span class="s1">'query'</span> <span class="o">=&gt;</span> <span class="p">[</span>
     <span class="s1">'page'</span> <span class="o">=&gt;</span> <span class="mi">4</span><span class="p">,</span>
     <span class="s1">'limit'</span> <span class="o">=&gt;</span> <span class="mi">50</span><span class="p">,</span>
@@ -513,7 +608,7 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
 <td>Get products updated since datetime</td>
 </tr>
 </tbody></table>
-<h2 id='get-specific-product'>Get Specific Product</h2><div class="highlight"><pre class="highlight php tab-php"><code><span class="nv">$api_client</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'products/1'</span><span class="p">);</span>
+<h2 id='get-specific-product'>Get Specific Product</h2><div class="highlight"><pre class="highlight php tab-php"><code><span class="nv">$api_client</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'products/1'</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -549,11 +644,15 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
 <td>The ID of the product to retrieve</td>
 </tr>
 </tbody></table>
-<h1 id='orders'>Orders</h1><h2 id='get-all-orders'>Get All Orders</h2><div class="highlight"><pre class="highlight php tab-php"><code><span class="nv">$api_client</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'orders'</span><span class="p">,</span> <span class="p">[</span>
+<h1 id='orders'>Orders</h1><h2 id='get-all-orders'>Get All Orders</h2><div class="highlight"><pre class="highlight php tab-php"><code><span class="nv">$api_client</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'orders'</span><span class="p">,</span> <span class="p">[</span>
   <span class="s1">'query'</span> <span class="o">=&gt;</span> <span class="p">[</span>
     <span class="s1">'page'</span> <span class="o">=&gt;</span> <span class="mi">4</span><span class="p">,</span>
     <span class="s1">'limit'</span> <span class="o">=&gt;</span> <span class="mi">50</span><span class="p">,</span>
-    <span class="s1">'createdAfter'</span> <span class="o">=&gt;</span> <span class="s1">'2000-04-03 00:00:00'</span>
+    <span class="s1">'createdAfter'</span> <span class="o">=&gt;</span> <span class="s1">'2000-04-03 00:00:00'</span><span class="p">,</span>
+    <span class="s1">'externalIds'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+      <span class="s1">'be7795a3-0f38-45c9-b534-661aade8ec1c'</span><span class="p">,</span>
+      <span class="s1">'test-external-id'</span>
+    <span class="p">]</span>
   <span class="p">]</span>
 <span class="p">]);</span>
 </code></pre></div>
@@ -566,6 +665,7 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"external_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2964836b-e787-488f-a5e8-cc8bbb65822f"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"transaction_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"done"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-04-07 20:12:36"</span><span class="w">
@@ -608,8 +708,15 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
 <td>false</td>
 <td>Get orders created after datetime</td>
 </tr>
+<tr>
+<td>externalIds</td>
+<td>array of strings</td>
+<td>NULL</td>
+<td>false</td>
+<td>Find orders with given external id(s)</td>
+</tr>
 </tbody></table>
-<h2 id='get-specific-order'>Get Specific Order</h2><div class="highlight"><pre class="highlight php tab-php"><code><span class="nv">$api_client</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'orders/1'</span><span class="p">);</span>
+<h2 id='get-specific-order'>Get Specific Order</h2><div class="highlight"><pre class="highlight php tab-php"><code><span class="nv">$api_client</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'orders/1'</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
@@ -626,8 +733,12 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
       </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text/plain"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0000-0000-0000-0000"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="p">[</span><span class="c1">...</span><span class="p">]</span><span class="w">
-  </span><span class="p">],</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"image/jpeg"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"</span><span class="se">\/</span><span class="s2">9j</span><span class="se">\/</span><span class="s2">4AAQSkZJRgABAQAASABIAAD</span><span class="se">\/</span><span class="s2">2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD</span><span class="se">\/</span><span class="s2">wAALCAAoAWgBAREA</span><span class="se">\/</span><span class="s2">8QAHAABAQEAAwEBAQAAAAAAAAAAAAgHBQYJBAEC</span><span class="se">\/</span><span class="s2">8QAMRAAAQMEAgEDAwMEAQUAAAAAAgEDBAAFBgcIERIJEyEiMUEyYXEUFSNRF1NidIGi</span><span class="se">\/</span><span class="s2">9oACAEBAAA</span><span class="se">\/</span><span class="s2">APVOlKUpSlKUpSlKUpSlKUpSlKUpSlKUpSlKUpSlKVB</span><span class="se">\/</span><span class="s2">qebt2Xj7OuOOGn79Is2SbXuyQX58V4mn246utMNsi4P1Ajrr6eRD0vi0Q</span><span class="se">\/</span><span class="s2">YlRcS5EcIsh4Mazj8m+P8Au7M3MlxWZDPIUnvN+xObedBpTFtsU7D3TBCadV1FAl7L6fnbOcuzIm5vTDkbUiMDHHJoWPXFxgV7Rh450b3WkVfv4OeY9</span><span class="se">\/</span><span class="s2">nxrsuuONuF8p</span><span class="se">\/</span><span class="s2">T</span><span class="se">\/</span><span class="s2">wBP6zzu7Xq22wLNaroj1odabf8AdaZMRHt1twfFUcLv6e</span><span class="se">\/</span><span class="s2">hPmpk5V+nDxG4vabvGzb3sbY0maCf0dltx3CAi3C4Gi+018RO</span><span class="se">\/</span><span class="s2">FOlM1T5QANU+ekXYvTN4tbE1fxqyzMxyJ3F8x2zBYkWg3YgPpaWGWn0gyDaNOjMikm6oL8eCtp8L5JXHMekrMz60OZLvzktm9+2JKFXluEN9HIcR9flERJAq66Ar9vEmfj4QRrmvSj2</span><span class="se">\/</span><span class="s2">s7LrBszUWysmfyJNY3WLEt11lPE84rTpSQNn3S+o2wKL5B5KqojnXfigomfY7C2x6om0s1uZ7WvuE6HxC4raLdBspq27eHE7VDP58SNQ8XCJxDQEdbAQXsiqs+LvCLVvEu7X+663ybL7keRR2I8tu+TY74D7RESGHtMN9Evmvfff4+1YC76K3HB503S2VspFMlJepcD8r</span><span class="se">\/</span><span class="s2">4tTjp3iTr61+pVaNX6aveQXXHtUux8gyK6XN5l00mxSFz2QVppsUH3zjMqKp5do8vfSdJ3nnTqbHd5+pnrfU+WzblEtGRYvDjSn7c423JbETuDiKBOAYovYJ9xX47r4+WfAuy8LtTSN</span><span class="se">\/</span><span class="s2">cfd659ZrlYJ0Ns48y4tCclHnhaRGnIzbPRCpISiQkiiJ91bOLcl5+OcGrTye2ZCR65s4axd5jQojKTphAINInSdAj7pN9dJ0Pu</span><span class="se">\/</span><span class="s2">CdJUX6F4vbh9ReySOQHJjduSW7GLrNfZsdis5IDZNtmoGbQH5NMNCaE2n0GZqBKRfZS</span><span class="se">\/</span><span class="s2">jeOiN1emWlm3lx+3Df8gwVu4tQr3j16c8mh8+</span><span class="se">\/</span><span class="s2">D3gDppxs+lD3BAHGyIPFV8u09N9WbCs22NcYzsrHUIbdk1rj3NgDXs2kdBCVsv8AuFVUV</span><span class="se">\/</span><span class="s2">cVrtlKUpSlKUpSlKUpSlKUpSlKV5s890W3+oPxcvE9FGC7crdHAy</span><span class="se">\/</span><span class="s2">Sjo3UO</span><span class="se">\/</span><span class="s2">n9vdbVf</span><span class="se">\/</span><span class="s2">VUd6kMuJD4TbRdmEKAcCI0Pf5cOdHEE</span><span class="se">\/</span><span class="s2">nyVKk7PosuH6JlkZnIXuFHt7qd</span><span class="se">\/</span><span class="s2">wDTO+oYf</span><span class="se">\/</span><span class="s2">BDVocKZTEPh1qmZMfbYYZxGG466ZIINgLfakSr8IiIiqqrUb2FiV6m3MJ7J57Lr2htQP8AtQmXBVGbxJ8kVO0X7++QIZp19LDbYqgkfa+noiACgAKCIp0iInSIlR7zW5cX3Dp0fjRx0hu5JujMQ</span><span class="se">\/</span><span class="s2">pGGYKof9iZcH5kOr9gd8FUhQlRAFPdNUFBQ+b4+cXG+JnFLKcQgSwuWYXSz3C63u5M99P3BYpIDbSr9Xtt9II99Kq+R9IpqiRD6eHEBvlRoq7psfamUWzArTksmPFxrHpTcVJNxWPGJ6XKIgNHP8ZMAAqPaeBKioir5arxaHM+JPPy48OIWeXfJtfZDa3J1qYub3uHCNIiygc6ToWzRGnWi8EETRQJRRUFEuPkpue2ce9I5Ztm4+2blkgEsFg1+JM5xUbjNf76J0gRevsPkv4qb</span><span class="se">\/</span><span class="s2">So05dMU0tdN45qrsjLNt3E7zIkvp</span><span class="se">\/</span><span class="s2">mKEJn7Kkv+3DN97tP1C63</span><span class="se">\/</span><span class="s2">qsE5z4LkeyvU11tg+JbBuOD3i74xDZiZBbxMpEAkO4EpggONl2qCo</span><span class="se">\/</span><span class="s2">Bj8Evz+K+Hlbwe37qbX</span><span class="se">\/\/</span><span class="s2">ADVm</span><span class="se">\/</span><span class="s2">I2ZviyYO81cpmN5n</span><span class="se">\/</span><span class="s2">cQjk2po2piKTXPLrzRSRDbVRQvkv0rsfJfaEbkV6UFw2bieOt2SLLh2xXrPGRPahpDuzLDzTaIiJ7QEypD8J9Aj8JW4enJdrZd+FusXLQQEEa3vxXhFU7B9uU8LiKn4VSRV</span><span class="se">\/</span><span class="s2">gkX81wPqnXe123hFnka5OgLtzftMSEBKnbj6XGO70P7oDThfwK12f077bcbVwu1XGugGDx2lySKGnS+y7JedaX+FbMFT9lSqOpSlKUpSlKUpSlKUpSlKUpSpf53cS7nykwCzP4TemrLn2FTiueOzXyIG1IvH3GCMUVW</span><span class="se">\/</span><span class="s2">JW2iQ0ReiaH8Kq1NWfaV9TXlvarNpjfNrwvCMKiTGJN3vMCSwb1yRr7OG0y+6pl9yFtAZbU+lLrpOqM5j8eckyvhPN4+6KxhblLgRrLbrRbllMMKUeJJYVe3XjBvtG2lJVUkVVRfuq1ne3tNcrGvTtwXQWpMQVc1egW+xZVAC6w2XI9uFh1ZIC+bwtF5OCy2XgZeQOGiIqKqpkmh7L6qnHPW0DVutuKmumbTANx4npVzhOSZb7hdm88Y3UUM1+E76REERFERBRE3rD859TG</span><span class="se">\/</span><span class="s2">aw2WudaYxDHsvYtLA4QNsmQySTNccUXlNSnvNorbaoY+4oipJ8+X6albQOm</span><span class="se">\/</span><span class="s2">U747XbIsqxfjPiF9ynKZBP3PI8ivcCbcnkIvIm0dS5gggp</span><span class="se">\/</span><span class="s2">WXQ9kXSkq+I+NpcW8z565Nmt1g8rtRYliuNBaicgSbRJjuuuzvdbRGyRua+viraur8iidinz+FweLxq5r8MNhZXM4ZWjFs315l8tZwY7e5INLbHVVek6cfY</span><span class="se">\/</span><span class="s2">QK+CGDq+YCPmPYotd94kcSt3Qt8ZBy65W3S2OZ9eYxQ7bZ7c4LjVtbIBbUlIFUBUWgRoAAjTxIyIiJfj99QnRHIDk5lWt9R4Pirjes2Lk3dMrv39ziNI0ZGrSILBuo8assq8aILZIRPCifIr1Ztis1qxqyW</span><span class="se">\/</span><span class="s2">G7HCbh221RWoUOO2nQMsNAgNgP7IIoifxXn5zJ0Py4uHNLEOSHHXVNuypvFcfix2HLjdIbMZZQuS0Ns2nJTLpIgPivYqidqnyvSpXA7Tw31XuVOLu6g2Jr</span><span class="se">\/</span><span class="s2">AAHXeL3dxobpLhz2OnmgMTQTVuXKd8fIRXxAR8uulXpVSrS1TxtwfWnHG2capoLfMeas8i1XMnx8P65ZKuHKPpF7DzN5xRRFVRRURF+O6i7F+LvqA8Kr3eLTxOvOPbCwG6yymM2a9vMtGyap0hOA64ygueKCKmy6iH4ipCnSIOOWaVu71BuTTGgeWuwbfgTOFyXJLuHxIhRXJj7fw83G7Uxcd9vtUcN0</span><span class="se">\/</span><span class="s2">FsiNoTFTr2EslmteOWeBjtkgswrba4zUOHGaToGGGwQG2xT8IIiiJ+yVyNKUpSlKUpSlKUpSlKUpSlKUpSlKUpSlKUpSlTjv7gxp</span><span class="se">\/</span><span class="s2">kNsKxbXvN1yvE8vsCAjF5xaaxDkvK2SEyTpOMu9k2qfQSIJIi9KqogoNAwIr0KBFhyJ8me6w0DTkqQgI6+QiiK4aNiIIRKna+IiPar0iJ8V9tKUpSlKUpSlKUpSlKUpSlK</span><span class="se">\/</span><span class="s2">9k="</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint retrieves a specific order.</p>
@@ -649,7 +760,7 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
 <aside class="notice">
 The product keys will only be included if the order status is <code>done</code>
 </aside>
-<h2 id='place-order'>Place Order</h2><div class="highlight"><pre class="highlight php tab-php"><code><span class="nv">$api_client</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">'orders'</span><span class="p">,</span> <span class="p">[</span>
+<h2 id='place-order'>Place Order</h2><div class="highlight"><pre class="highlight php tab-php"><code><span class="nv">$api_client</span><span class="o">-&gt;</span><span class="nf">post</span><span class="p">(</span><span class="s1">'orders'</span><span class="p">,</span> <span class="p">[</span>
   <span class="s1">'json'</span> <span class="o">=&gt;</span> <span class="p">[</span>
     <span class="s1">'products'</span> <span class="o">=&gt;</span> <span class="p">[</span>
       <span class="p">[</span>
@@ -657,7 +768,7 @@ The product keys will only be included if the order status is <code>done</code>
         <span class="s1">'quantity'</span> <span class="o">=&gt;</span> <span class="mi">4</span><span class="p">,</span>
         <span class="s1">'price_cents'</span> <span class="o">=&gt;</span> <span class="mi">615</span>
       <span class="p">],</span>
-      <span class="p">[</span><span class="o">...</span><span class="p">]</span>
+      <span class="p">[</span><span class="mf">...</span><span class="p">]</span>
     <span class="p">]</span>
   <span class="p">]</span>
 <span class="p">]);</span>
@@ -668,6 +779,11 @@ The product keys will only be included if the order status is <code>done</code>
 <div class="highlight"><pre class="highlight json-doc tab-json-doc"><code><span class="c1">// -&gt; Status Code: 201 Created</span><span class="w">
 </span><span class="p">{</span><span class="w">
   </span><span class="nl">"order_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="c1">// -&gt; Status Code: 409 Duplicate</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"order_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="w"> </span><span class="c1">// Id of already existing order</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>This endpoint places a new order. Please do not exceed a maximum of 50 units per order.</p>
@@ -709,20 +825,27 @@ The product keys will only be included if the order status is <code>done</code>
 <td>int</td>
 <td>-</td>
 <td>true</td>
-<td>Price in cents (for data reconciliation)</td>
+<td>Maximum price in cents</td>
+</tr>
+<tr>
+<td>external_id</td>
+<td>string (max. 64 chars)</td>
+<td>NULL</td>
+<td>false</td>
+<td><strong>strongly recommended</strong> External ID to avoid duplicate orders (because of connection problems or similar)</td>
 </tr>
 </tbody></table>
-<h1 id='user'>User</h1><h2 id='get-balance'>Get Balance</h2><div class="highlight"><pre class="highlight php tab-php"><code><span class="nv">$api_client</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">'balance'</span><span class="p">);</span>
+<h1 id='user'>User</h1><h2 id='get-balance'>Get Balance</h2><div class="highlight"><pre class="highlight php tab-php"><code><span class="nv">$api_client</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'balance'</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json-doc tab-json-doc"><code><span class="c1">// -&gt; Status Code: 200 OK</span><span class="w">
 </span><span class="p">{</span><span class="w">
-  </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="w">
+  </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="w"> </span><span class="c1">// 100.00 €</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>This endpoint retrieves your current balance. Make sure to use the appropriate endpoint.</p>
+<p>This endpoint retrieves your current balance in cents. Make sure to use the appropriate endpoint.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>GET /balance</code></p>
 <h3 id='query-parameters'>Query Parameters</h3>
