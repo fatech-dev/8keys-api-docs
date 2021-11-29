@@ -9,9 +9,9 @@ toc_footers:
   - <a href='https://8keys.de/'>Copyright (c) 2020 8keys</a>
 
 includes:
-  - products.md.erb
-  - orders.md.erb
-  - user.md.erb
+  - products.md
+  - orders.md
+  - user.md
 
 search: true
 ---
@@ -80,7 +80,7 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
 
 ## Rate Limit
 
-To protect our servers from too many requests, we have a rate limit of **60 requests per minute**. The rate limit applies to each environment separately.
+To protect our servers from too many requests, we have a rate limit of **120 requests per minute** (production) and **60 requests per minute** (sandbox). The rate limit applies to each environment separately.
 
 You can check the current rate limit status via the response headers:
 
@@ -111,6 +111,7 @@ Error Code | Description
 401 Unauthorized | The store has not yet been activated or the API token is invalid.
 404 Not Found | Route or specified product/order not found.
 405 Method Not Allowed | You tried to access a resource with an invalid method.
+409 Duplicate | An order with the given external id already exists.
 422 Unprocessable Entity | Your request query / body data is invalid (see response body for more details).
 429 Too Many Requests | You're sending too many requests! Slow down!
 500 Internal Server Error | We had a problem with our server. Try again later.
@@ -120,3 +121,4 @@ Error Code | Description
 Version | Notes
 ------- | -------
 1.0.0 | Initial version
+1.0.1 | Added order external id and more descriptions

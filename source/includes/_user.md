@@ -11,11 +11,11 @@ $api_client->get('balance');
 ```json-doc
 // -> Status Code: 200 OK
 {
-  "balance": 10000
+  "balance": 10000 // 100.00 €
 }
 ```
 
-This endpoint retrieves your current balance. Make sure to use the appropriate endpoint.
+This endpoint retrieves your current balance in cents. Make sure to use the appropriate endpoint.
 
 ### HTTP Request
 
