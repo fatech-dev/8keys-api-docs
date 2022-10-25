@@ -283,7 +283,7 @@
   color: #859900;
 }
     </style>
-    <link href="stylesheets/screen-c63e83ee.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/screen-a74f9e06.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print-953e3353.css" rel="stylesheet" media="print" />
       <script src="javascripts/all-b12a2749.js"></script>
 
@@ -358,7 +358,7 @@
               </ul>
           </li>
           <li>
-            <a href="#user" class="toc-h1 toc-link" data-title="User">User</a>
+            <a href="#merchant" class="toc-h1 toc-link" data-title="Merchant">Merchant</a>
               <ul class="toc-list-h2">
                   <li>
                     <a href="#get-balance" class="toc-h2 toc-link" data-title="Get Balance">Get Balance</a>
@@ -368,7 +368,7 @@
       </ul>
         <ul class="toc-footer">
             <li><a href='https://api.8keys.de/'>8keys API Developer Portal</a></li>
-            <li><a href='https://8keys.de/'>Copyright (c) 2020 8keys</a></li>
+            <li><a href='https://8keys.de/'>Copyright (c) 2022 8keys</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -379,13 +379,13 @@
 
 <p>In the dark area to the right you will find a sample implementation with PHP and <a href="http://docs.guzzlephp.org/en/stable/">Guzzle</a>.</p>
 
-<p>Some general information about the API:</p>
+<p>General Information about the API:</p>
 
 <ul>
-<li>Content-Type: <code>application/json</code> or <code>application/x-www-form-urlencoded</code> (we strongly recommend using json!)</li>
-<li>Response Format: <code>JSON</code>, make sure to add <code>Accept: application/json</code> to all your API requests to the server!</li>
-<li>Money Format: <code>Cents</code> as an integer, f.e. 12972 for 129.72 EUR.</li>
-<li>DateTime Format: <code>YYYY-MM-dd HH:mm:ss</code>, f.e. <code>2020-04-03 18:04:00</code></li>
+<li>Content-Type: <code>application/json</code> or <code>application/x-www-form-urlencoded</code> (we strongly recommend using json)</li>
+<li>Response Format: <code>JSON</code>, make sure to add <code>Accept: application/json</code> to all your requests</li>
+<li>Money Format: <code>Euro-Cents</code> as integer, e.g. 12972 for 129.72 EUR.</li>
+<li>DateTime Format: <code>YYYY-MM-dd HH:mm:ss</code>, e.g. <code>2020-04-03 18:04:00</code></li>
 </ul>
 
 <p>Environments:</p>
@@ -397,20 +397,20 @@
 </tr>
 </thead><tbody>
 <tr>
-<td>Development<br><em>Dev</em></td>
-<td>Environment to develop / test with virtual balance which can be topped up with one click.<br>Orders / Transactions in this environment are automatically deleted after 48 hours.</td>
+<td>Sandbox</td>
+<td>Environment to implement / test with virtual balance which can be topped up with one click.<br>Orders are automatically deleted after 48 hours.</td>
 </tr>
 <tr>
-<td>Production<br><em>Prod</em></td>
+<td>Production</td>
 <td>Live environment for productive use with real balance which can be topped up via bank transfer / PayPal.</td>
 </tr>
 </tbody></table>
-<h2 id='endpoints'>Endpoints</h2><h3 id='development'>Development</h3>
-<p><code>https://api.8keys.de/d/v1</code></p>
+<h2 id='endpoints'>Endpoints</h2><h3 id='sandbox'>Sandbox</h3>
+<p><code>https://api.8keys.de/sandbox/v1</code></p>
 <h3 id='production'>Production</h3>
-<p><code>https://api.8keys.de/p/v1</code></p>
+<p><code>https://api.8keys.de/production/v1</code></p>
 <h2 id='authentication'>Authentication</h2><h3 id='generate-api-keys'>Generate API keys</h3>
-<p>To (re-)generate your API keys, go to <strong>My Stores</strong> and click on <img src="images/key-btn-6125194c.png" alt="" /> in the <strong>Actions</strong> column. Confirm the procedure and be sure to note your api keys down in a safe place!</p>
+<p>To generate your API keys, go to <strong>My Merchants</strong> and click on <img src="images/key-btn-6125194c.png" alt="" /> in the <strong>Actions</strong> column. Confirm the procedure and make sure to save your api keys! We recommend to frequently regenerate your API keys.</p>
 
 <p><img src="images/api-keys-4f7a2e36.png" alt="" /></p>
 <h3 id='authorization'>Authorization</h3>
@@ -418,7 +418,7 @@
 <p>Client implementation (used in the following code examples)</p>
 </blockquote>
 <div class="highlight"><pre class="highlight php tab-php"><code><span class="nv">$api_client</span> <span class="o">=</span> <span class="k">new</span> <span class="err">\</span><span class="nf">GuzzleHttp\Client</span><span class="p">([</span>
-    <span class="s1">'base_uri'</span> <span class="o">=&gt;</span> <span class="s1">'https://api.8keys.de/d/v1/'</span><span class="p">,</span>
+    <span class="s1">'base_uri'</span> <span class="o">=&gt;</span> <span class="s1">'https://api.8keys.de/sandbox/v1/'</span><span class="p">,</span>
     <span class="s1">'timeout'</span>  <span class="o">=&gt;</span> <span class="mf">60.0</span><span class="p">,</span>
     <span class="s1">'http_errors'</span> <span class="o">=&gt;</span> <span class="kc">false</span><span class="p">,</span>
     <span class="s1">'headers'</span>  <span class="o">=&gt;</span> <span class="p">[</span>
@@ -438,17 +438,15 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
 <h2 id='rate-limit'>Rate Limit</h2>
 <p>To protect our servers from too many requests, we have a rate limit of <strong>120 requests per minute</strong> (production) and <strong>60 requests per minute</strong> (sandbox). The rate limit applies to each environment separately.</p>
 
-<p>You can check the current rate limit status via the response headers:</p>
+<p>You can check the current rate limit status with response headers:</p>
 
 <p><code>x-ratelimit-limit: 60</code> and <code>x-ratelimit-remaining: 34</code></p>
 
-<p>If you reach the rate limit, the following requests will be blocked with <code>429 Too Many Requests</code> and you can use the following response header to check when the rate limit is reset (UNIX Timestamp):</p>
+<p>If you hit the rate limit, following requests will be blocked with <code>429 Too Many Requests</code> and you can use the following response header to check when the rate limit is reset (UNIX Timestamp):</p>
 
 <p><code>x-ratelimit-reset: 1591463645</code></p>
 <h2 id='product-key-types'>Product-Key Types</h2>
 <p>We use <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types">MIME Types</a> to describe the format of our product keys.</p>
-
-<p>The most used types are the following:</p>
 
 <table><thead>
 <tr>
@@ -459,18 +457,16 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
 </thead><tbody>
 <tr>
 <td>text/plain</td>
-<td>Serial key as a text</td>
+<td>Product key as plain text</td>
 <td>ABCD-1234-7890-4217</td>
 </tr>
 <tr>
 <td>image/jpeg<br>image/png<br>image/gif</td>
-<td>Serial key as an image (base64 encoded)</td>
+<td>Product key as an image (base64 encoded)</td>
 <td><img src="data:image/jpeg;base64,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"></td>
 </tr>
 </tbody></table>
 <h2 id='error-codes'>Error Codes</h2>
-<p>The 8keys API uses the following error codes:</p>
-
 <table><thead>
 <tr>
 <th>Error Code</th>
@@ -483,11 +479,11 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
 </tr>
 <tr>
 <td>401 Unauthorized</td>
-<td>The store has not yet been activated or the API token is invalid.</td>
+<td>API token is invalid or Merchant has not been activated yet.</td>
 </tr>
 <tr>
 <td>404 Not Found</td>
-<td>Route or specified product/order not found.</td>
+<td>Route or specified element not found.</td>
 </tr>
 <tr>
 <td>405 Method Not Allowed</td>
@@ -503,7 +499,7 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
 </tr>
 <tr>
 <td>429 Too Many Requests</td>
-<td>You&#39;re sending too many requests! Slow down!</td>
+<td>You&#39;re sending too many requests (see Rate Limit)</td>
 </tr>
 <tr>
 <td>500 Internal Server Error</td>
@@ -524,6 +520,10 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
 <tr>
 <td>1.0.1</td>
 <td>Added order external id and more descriptions</td>
+</tr>
+<tr>
+<td>1.0.2</td>
+<td>Changed Order IDs from integer (e.g. <em>12624</em>) to UUID (e.g. <em>61f501e1-3c47-4733-9fff-055678e73629</em>)<br>Please make sure your implementation saves our IDs as <strong>string</strong>/<strong>UUID</strong><br><br>Switched from Store to Merchant<br>New sandbox/production endpoints<br>Fixed <code>Get Balance</code> Route<br>Made descriptions simpler</td>
 </tr>
 </tbody></table>
 <h1 id='products'>Products</h1><h2 id='get-all-products'>Get All Products</h2><div class="highlight"><pre class="highlight php tab-php"><code><span class="nv">$api_client</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'products'</span><span class="p">,</span> <span class="p">[</span>
@@ -547,7 +547,7 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
       </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Anno 2070 Uplay CD Key"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy."</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"cover"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">api.8keys.de</span><span class="se">\/</span><span class="s2">example-cover.jpeg"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"cover"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https:</span><span class="se">\/\/</span><span class="s2">api.8keys.de</span><span class="se">\/</span><span class="s2">example-cover.jpg"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"platform"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Uplay"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"German, English, French, Spanish, Czech, Polish, Russian, Italian"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"region"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Region free"</span><span class="p">,</span><span class="w">
@@ -559,7 +559,7 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>This endpoint retrieves all products.</p>
+<p>Retrieve all products.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>GET /products</code></p>
 <h3 id='query-parameters'>Query Parameters</h3>
@@ -577,7 +577,7 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
 <td>int</td>
 <td>1</td>
 <td>false</td>
-<td>Current page (&gt;= 1)</td>
+<td>Current page</td>
 </tr>
 <tr>
 <td>limit</td>
@@ -591,14 +591,14 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
 <td>string</td>
 <td>NULL</td>
 <td>false</td>
-<td>Filter by product name (*wildcard*)</td>
+<td>Filter by product name</td>
 </tr>
 <tr>
 <td>productIds</td>
 <td>array of int</td>
 <td>NULL</td>
 <td>false</td>
-<td>Filter by product ids (max. 100 ids)</td>
+<td>Filter by product ids (max. 100)</td>
 </tr>
 <tr>
 <td>updatedSince</td>
@@ -629,7 +629,7 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>This endpoint retrieves a specific product.</p>
+<p>Retrieve a specific product.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
 <p><code>GET /products/{ID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
@@ -666,7 +666,6 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
     </span><span class="p">{</span><span class="w">
       </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="nl">"external_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2964836b-e787-488f-a5e8-cc8bbb65822f"</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"transaction_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"done"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-04-07 20:12:36"</span><span class="w">
     </span><span class="p">},</span><span class="w">
@@ -674,7 +673,7 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>This endpoint retrieves all orders (without product keys).</p>
+<p>Retrieves all orders (without product keys).</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>GET /orders</code></p>
 <h3 id='query-parameters'>Query Parameters</h3>
@@ -724,7 +723,7 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
 <div class="highlight"><pre class="highlight json-doc tab-json-doc"><code><span class="c1">// -&gt; Status Code: 200 OK</span><span class="w">
 </span><span class="p">{</span><span class="w">
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"transaction_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"external_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2964836b-e787-488f-a5e8-cc8bbb65822f"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"done"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-04-07 20:12:36"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"product_keys"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -741,7 +740,7 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>This endpoint retrieves a specific order.</p>
+<p>Retrieve a specific order.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
 <p><code>GET /orders/{ID}</code></p>
 <h3 id='url-parameters'>URL Parameters</h3>
@@ -769,7 +768,8 @@ The product keys will only be included if the order status is <code>done</code>
         <span class="s1">'price_cents'</span> <span class="o">=&gt;</span> <span class="mi">615</span>
       <span class="p">],</span>
       <span class="p">[</span><span class="mf">...</span><span class="p">]</span>
-    <span class="p">]</span>
+    <span class="p">],</span>
+    <span class="s1">'external_id'</span> <span class="o">=&gt;</span> <span class="s1">'EXTERNAL-ID'</span><span class="p">,</span>
   <span class="p">]</span>
 <span class="p">]);</span>
 </code></pre></div>
@@ -778,15 +778,19 @@ The product keys will only be included if the order status is <code>done</code>
 </blockquote>
 <div class="highlight"><pre class="highlight json-doc tab-json-doc"><code><span class="c1">// -&gt; Status Code: 201 Created</span><span class="w">
 </span><span class="p">{</span><span class="w">
-  </span><span class="nl">"order_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="w">
+  </span><span class="nl">"order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fd1a1f3d-cff4-4b26-bd8b-354b3a15e8fe"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 
 </span><span class="c1">// -&gt; Status Code: 409 Duplicate</span><span class="w">
 </span><span class="p">{</span><span class="w">
-  </span><span class="nl">"order_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="w"> </span><span class="c1">// Id of already existing order</span><span class="w">
+  </span><span class="nl">"order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"51e0080a-f1b3-4a8b-a63d-1e3942e213f3"</span><span class="w"> </span><span class="c1">// Id of already existing order</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>This endpoint places a new order. Please do not exceed a maximum of 50 units per order.</p>
+<p>Places an order. Do not exceed a maximum of 50 units per order.</p>
+
+<aside class="warning">
+Attention! Our Order IDs are not integers anymore. Please save them as <b>string</b> or <b>UUID</b>
+</aside>
 <h3 id='http-request-3'>HTTP Request</h3>
 <p><code>POST /orders</code></p>
 <h3 id='body-parameters'>Body Parameters</h3>
@@ -835,17 +839,19 @@ The product keys will only be included if the order status is <code>done</code>
 <td><strong>strongly recommended</strong> External ID to avoid duplicate orders (because of connection problems or similar)</td>
 </tr>
 </tbody></table>
-<h1 id='user'>User</h1><h2 id='get-balance'>Get Balance</h2><div class="highlight"><pre class="highlight php tab-php"><code><span class="nv">$api_client</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'balance'</span><span class="p">);</span>
+<h1 id='merchant'>Merchant</h1><h2 id='get-balance'>Get Balance</h2><div class="highlight"><pre class="highlight php tab-php"><code><span class="nv">$api_client</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'balance'</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json-doc tab-json-doc"><code><span class="c1">// -&gt; Status Code: 200 OK</span><span class="w">
 </span><span class="p">{</span><span class="w">
-  </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="w"> </span><span class="c1">// 100.00 €</span><span class="w">
+  </span><span class="c1">// 100.00 €</span><span class="w">
+  </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"balance_cents"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
-<p>This endpoint retrieves your current balance in cents. Make sure to use the appropriate endpoint.</p>
+<p>Retrieve your current balance. Make sure to use the appropriate endpoint.</p>
 <h3 id='http-request'>HTTP Request</h3>
 <p><code>GET /balance</code></p>
 <h3 id='query-parameters'>Query Parameters</h3>
