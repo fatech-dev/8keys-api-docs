@@ -525,6 +525,10 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
 <td>1.0.2</td>
 <td>Changed Order IDs from integer (e.g. <em>12624</em>) to UUID (e.g. <em>61f501e1-3c47-4733-9fff-055678e73629</em>)<br>Please make sure your implementation saves our IDs as <strong>string</strong>/<strong>UUID</strong><br><br>Switched from Store to Merchant<br>New sandbox/production endpoints<br>Fixed <code>Get Balance</code> Route<br>Made descriptions simpler</td>
 </tr>
+<tr>
+<td>1.0.3</td>
+<td>Fixed typos</td>
+</tr>
 </tbody></table>
 <h1 id='products'>Products</h1><h2 id='get-all-products'>Get All Products</h2><div class="highlight"><pre class="highlight php tab-php"><code><span class="nv">$api_client</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'products'</span><span class="p">,</span> <span class="p">[</span>
   <span class="s1">'query'</span> <span class="o">=&gt;</span> <span class="p">[</span>
@@ -664,7 +668,7 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
   </span><span class="nl">"total_count"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
   </span><span class="nl">"result"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aa3f8586-a41a-4564-b3d3-7ffc0dd51776"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"external_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2964836b-e787-488f-a5e8-cc8bbb65822f"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"done"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-04-07 20:12:36"</span><span class="w">
@@ -715,14 +719,14 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
 <td>Find orders with given external id(s)</td>
 </tr>
 </tbody></table>
-<h2 id='get-specific-order'>Get Specific Order</h2><div class="highlight"><pre class="highlight php tab-php"><code><span class="nv">$api_client</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'orders/1'</span><span class="p">);</span>
+<h2 id='get-specific-order'>Get Specific Order</h2><div class="highlight"><pre class="highlight php tab-php"><code><span class="nv">$api_client</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'orders/aa3f8586-a41a-4564-b3d3-7ffc0dd51776'</span><span class="p">);</span>
 </code></pre></div>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <div class="highlight"><pre class="highlight json-doc tab-json-doc"><code><span class="c1">// -&gt; Status Code: 200 OK</span><span class="w">
 </span><span class="p">{</span><span class="w">
-  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aa3f8586-a41a-4564-b3d3-7ffc0dd51776"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"external_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2964836b-e787-488f-a5e8-cc8bbb65822f"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"done"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-04-07 20:12:36"</span><span class="p">,</span><span class="w">
@@ -846,9 +850,9 @@ Attention! Our Order IDs are not integers anymore. Please save them as <b>string
 </blockquote>
 <div class="highlight"><pre class="highlight json-doc tab-json-doc"><code><span class="c1">// -&gt; Status Code: 200 OK</span><span class="w">
 </span><span class="p">{</span><span class="w">
-  </span><span class="c1">// 100.00 €</span><span class="w">
-  </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"balance_cents"</span><span class="p">:</span><span class="w"> </span><span class="mi">10000</span><span class="w">
+  </span><span class="c1">// 100.32 €</span><span class="w">
+  </span><span class="nl">"balance"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.32</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"balance_cents"</span><span class="p">:</span><span class="w"> </span><span class="mi">10032</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>Retrieve your current balance. Make sure to use the appropriate endpoint.</p>
