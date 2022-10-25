@@ -1,6 +1,6 @@
 # Global Variables
-set :dev_endpoint, 'https://api.8keys.de/d/v1'
-set :prod_endpoint, 'https://api.8keys.de/p/v1'
+set :sandbox_endpoint, 'https://api.8keys.de/sandbox/v1'
+set :production_endpoint, 'https://api.8keys.de/production/v1'
 
 
 

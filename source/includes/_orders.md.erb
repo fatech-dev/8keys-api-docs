@@ -26,7 +26,6 @@ $api_client->get('orders', [
     {
       "id": 1,
       "external_id": "2964836b-e787-488f-a5e8-cc8bbb65822f",
-      "transaction_id": 1,
       "status": "done",
       "created_at": "2020-04-07 20:12:36"
     },
@@ -35,7 +34,7 @@ $api_client->get('orders', [
 }
 ```
 
-This endpoint retrieves all orders (without product keys).
+Retrieves all orders (without product keys).
 
 ### HTTP Request
 
@@ -62,7 +61,7 @@ $api_client->get('orders/1');
 // -> Status Code: 200 OK
 {
   "id": 1,
-  "transaction_id": 1,
+  "external_id": "2964836b-e787-488f-a5e8-cc8bbb65822f",
   "status": "done",
   "created_at": "2020-04-07 20:12:36",
   "product_keys": [
@@ -80,7 +79,7 @@ $api_client->get('orders/1');
 }
 ```
 
-This endpoint retrieves a specific order.
+Retrieve a specific order.
 
 ### HTTP Request
 
@@ -108,7 +107,8 @@ $api_client->post('orders', [
         'price_cents' => 615
       ],
       [...]
-    ]
+    ],
+    'external_id' => 'EXTERNAL-ID',
   ]
 ]);
 ```
@@ -118,16 +118,20 @@ $api_client->post('orders', [
 ```json-doc
 // -> Status Code: 201 Created
 {
-  "order_id": 14
+  "order_id": "fd1a1f3d-cff4-4b26-bd8b-354b3a15e8fe"
 }
 
 // -> Status Code: 409 Duplicate
 {
-  "order_id": 12 // Id of already existing order
+  "order_id": "51e0080a-f1b3-4a8b-a63d-1e3942e213f3" // Id of already existing order
 }
 ```
 
-This endpoint places a new order. Please do not exceed a maximum of 50 units per order.
+Places an order. Do not exceed a maximum of 50 units per order.
+
+<aside class="warning">
+Attention! Our Order IDs are not integers anymore. Please save them as <b>string</b> or <b>UUID</b>
+</aside>
 
 ### HTTP Request
 
