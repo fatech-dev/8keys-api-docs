@@ -24,7 +24,7 @@ $api_client->get('orders', [
   "total_count": 12,
   "result": [
     {
-      "id": 1,
+      "id": "aa3f8586-a41a-4564-b3d3-7ffc0dd51776",
       "external_id": "2964836b-e787-488f-a5e8-cc8bbb65822f",
       "status": "done",
       "created_at": "2020-04-07 20:12:36"
@@ -52,7 +52,7 @@ externalIds | array of strings | NULL | false | Find orders with given external 
 ## Get Specific Order
 
 ```php
-$api_client->get('orders/1');
+$api_client->get('orders/aa3f8586-a41a-4564-b3d3-7ffc0dd51776');
 ```
 
 > The above command returns JSON structured like this:
@@ -60,7 +60,7 @@ $api_client->get('orders/1');
 ```json-doc
 // -> Status Code: 200 OK
 {
-  "id": 1,
+  "id": "aa3f8586-a41a-4564-b3d3-7ffc0dd51776",
   "external_id": "2964836b-e787-488f-a5e8-cc8bbb65822f",
   "status": "done",
   "created_at": "2020-04-07 20:12:36",
