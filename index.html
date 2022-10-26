@@ -355,6 +355,9 @@
                   <li>
                     <a href="#place-order" class="toc-h2 toc-link" data-title="Place Order">Place Order</a>
                   </li>
+                  <li>
+                    <a href="#order-status" class="toc-h2 toc-link" data-title="Order Status">Order Status</a>
+                  </li>
               </ul>
           </li>
           <li>
@@ -528,6 +531,10 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
 <tr>
 <td>1.0.3</td>
 <td>Fixed typos</td>
+</tr>
+<tr>
+<td>1.0.4</td>
+<td>Added Order Status + two order response examples</td>
 </tr>
 </tbody></table>
 <h1 id='products'>Products</h1><h2 id='get-all-products'>Get All Products</h2><div class="highlight"><pre class="highlight php tab-php"><code><span class="nv">$api_client</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'products'</span><span class="p">,</span> <span class="p">[</span>
@@ -728,7 +735,15 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
 </span><span class="p">{</span><span class="w">
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aa3f8586-a41a-4564-b3d3-7ffc0dd51776"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"external_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2964836b-e787-488f-a5e8-cc8bbb65822f"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"done"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"processing"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-04-07 20:12:36"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="c1">// -&gt; Status Code: 200 OK</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aa3f8586-a41a-4564-b3d3-7ffc0dd51776"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"external_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2964836b-e787-488f-a5e8-cc8bbb65822f"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"done"</span><span class="p">,</span><span class="w"> </span><span class="c1">// or delivered</span><span class="w">
   </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-04-07 20:12:36"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"product_keys"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
@@ -742,6 +757,14 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
       </span><span class="nl">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"</span><span class="se">\/</span><span class="s2">9j</span><span class="se">\/</span><span class="s2">4AAQSkZJRgABAQAASABIAAD</span><span class="se">\/</span><span class="s2">2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD</span><span class="se">\/</span><span class="s2">wAALCAAoAWgBAREA</span><span class="se">\/</span><span class="s2">8QAHAABAQEAAwEBAQAAAAAAAAAAAAgHBQYJBAEC</span><span class="se">\/</span><span class="s2">8QAMRAAAQMEAgEDAwMEAQUAAAAAAgEDBAAFBgcIERIJEyEiMUEyYXEUFSNRF1NidIGi</span><span class="se">\/</span><span class="s2">9oACAEBAAA</span><span class="se">\/</span><span class="s2">APVOlKUpSlKUpSlKUpSlKUpSlKUpSlKUpSlKUpSlKVB</span><span class="se">\/</span><span class="s2">qebt2Xj7OuOOGn79Is2SbXuyQX58V4mn246utMNsi4P1Ajrr6eRD0vi0Q</span><span class="se">\/</span><span class="s2">YlRcS5EcIsh4Mazj8m+P8Au7M3MlxWZDPIUnvN+xObedBpTFtsU7D3TBCadV1FAl7L6fnbOcuzIm5vTDkbUiMDHHJoWPXFxgV7Rh450b3WkVfv4OeY9</span><span class="se">\/</span><span class="s2">nxrsuuONuF8p</span><span class="se">\/</span><span class="s2">T</span><span class="se">\/</span><span class="s2">wBP6zzu7Xq22wLNaroj1odabf8AdaZMRHt1twfFUcLv6e</span><span class="se">\/</span><span class="s2">hPmpk5V+nDxG4vabvGzb3sbY0maCf0dltx3CAi3C4Gi+018RO</span><span class="se">\/</span><span class="s2">FOlM1T5QANU+ekXYvTN4tbE1fxqyzMxyJ3F8x2zBYkWg3YgPpaWGWn0gyDaNOjMikm6oL8eCtp8L5JXHMekrMz60OZLvzktm9+2JKFXluEN9HIcR9flERJAq66Ar9vEmfj4QRrmvSj2</span><span class="se">\/</span><span class="s2">s7LrBszUWysmfyJNY3WLEt11lPE84rTpSQNn3S+o2wKL5B5KqojnXfigomfY7C2x6om0s1uZ7WvuE6HxC4raLdBspq27eHE7VDP58SNQ8XCJxDQEdbAQXsiqs+LvCLVvEu7X+663ybL7keRR2I8tu+TY74D7RESGHtMN9Evmvfff4+1YC76K3HB503S2VspFMlJepcD8r</span><span class="se">\/</span><span class="s2">4tTjp3iTr61+pVaNX6aveQXXHtUux8gyK6XN5l00mxSFz2QVppsUH3zjMqKp5do8vfSdJ3nnTqbHd5+pnrfU+WzblEtGRYvDjSn7c423JbETuDiKBOAYovYJ9xX47r4+WfAuy8LtTSN</span><span class="se">\/</span><span class="s2">cfd659ZrlYJ0Ns48y4tCclHnhaRGnIzbPRCpISiQkiiJ91bOLcl5+OcGrTye2ZCR65s4axd5jQojKTphAINInSdAj7pN9dJ0Pu</span><span class="se">\/</span><span class="s2">CdJUX6F4vbh9ReySOQHJjduSW7GLrNfZsdis5IDZNtmoGbQH5NMNCaE2n0GZqBKRfZS</span><span class="se">\/</span><span class="s2">jeOiN1emWlm3lx+3Df8gwVu4tQr3j16c8mh8+</span><span class="se">\/</span><span class="s2">D3gDppxs+lD3BAHGyIPFV8u09N9WbCs22NcYzsrHUIbdk1rj3NgDXs2kdBCVsv8AuFVUV</span><span class="se">\/</span><span class="s2">cVrtlKUpSlKUpSlKUpSlKUpSlKV5s890W3+oPxcvE9FGC7crdHAy</span><span class="se">\/</span><span class="s2">Sjo3UO</span><span class="se">\/</span><span class="s2">n9vdbVf</span><span class="se">\/</span><span class="s2">VUd6kMuJD4TbRdmEKAcCI0Pf5cOdHEE</span><span class="se">\/</span><span class="s2">nyVKk7PosuH6JlkZnIXuFHt7qd</span><span class="se">\/</span><span class="s2">wDTO+oYf</span><span class="se">\/</span><span class="s2">BDVocKZTEPh1qmZMfbYYZxGG466ZIINgLfakSr8IiIiqqrUb2FiV6m3MJ7J57Lr2htQP8AtQmXBVGbxJ8kVO0X7++QIZp19LDbYqgkfa+noiACgAKCIp0iInSIlR7zW5cX3Dp0fjRx0hu5JujMQ</span><span class="se">\/</span><span class="s2">pGGYKof9iZcH5kOr9gd8FUhQlRAFPdNUFBQ+b4+cXG+JnFLKcQgSwuWYXSz3C63u5M99P3BYpIDbSr9Xtt9II99Kq+R9IpqiRD6eHEBvlRoq7psfamUWzArTksmPFxrHpTcVJNxWPGJ6XKIgNHP8ZMAAqPaeBKioir5arxaHM+JPPy48OIWeXfJtfZDa3J1qYub3uHCNIiygc6ToWzRGnWi8EETRQJRRUFEuPkpue2ce9I5Ztm4+2blkgEsFg1+JM5xUbjNf76J0gRevsPkv4qb</span><span class="se">\/</span><span class="s2">So05dMU0tdN45qrsjLNt3E7zIkvp</span><span class="se">\/</span><span class="s2">mKEJn7Kkv+3DN97tP1C63</span><span class="se">\/</span><span class="s2">qsE5z4LkeyvU11tg+JbBuOD3i74xDZiZBbxMpEAkO4EpggONl2qCo</span><span class="se">\/</span><span class="s2">Bj8Evz+K+Hlbwe37qbX</span><span class="se">\/\/</span><span class="s2">ADVm</span><span class="se">\/</span><span class="s2">I2ZviyYO81cpmN5n</span><span class="se">\/</span><span class="s2">cQjk2po2piKTXPLrzRSRDbVRQvkv0rsfJfaEbkV6UFw2bieOt2SLLh2xXrPGRPahpDuzLDzTaIiJ7QEypD8J9Aj8JW4enJdrZd+FusXLQQEEa3vxXhFU7B9uU8LiKn4VSRV</span><span class="se">\/</span><span class="s2">gkX81wPqnXe123hFnka5OgLtzftMSEBKnbj6XGO70P7oDThfwK12f077bcbVwu1XGugGDx2lySKGnS+y7JedaX+FbMFT9lSqOpSlKUpSlKUpSlKUpSlKUpSpf53cS7nykwCzP4TemrLn2FTiueOzXyIG1IvH3GCMUVW</span><span class="se">\/</span><span class="s2">JW2iQ0ReiaH8Kq1NWfaV9TXlvarNpjfNrwvCMKiTGJN3vMCSwb1yRr7OG0y+6pl9yFtAZbU+lLrpOqM5j8eckyvhPN4+6KxhblLgRrLbrRbllMMKUeJJYVe3XjBvtG2lJVUkVVRfuq1ne3tNcrGvTtwXQWpMQVc1egW+xZVAC6w2XI9uFh1ZIC+bwtF5OCy2XgZeQOGiIqKqpkmh7L6qnHPW0DVutuKmumbTANx4npVzhOSZb7hdm88Y3UUM1+E76REERFERBRE3rD859TG</span><span class="se">\/</span><span class="s2">aw2WudaYxDHsvYtLA4QNsmQySTNccUXlNSnvNorbaoY+4oipJ8+X6albQOm</span><span class="se">\/</span><span class="s2">U747XbIsqxfjPiF9ynKZBP3PI8ivcCbcnkIvIm0dS5gggp</span><span class="se">\/</span><span class="s2">WXQ9kXSkq+I+NpcW8z565Nmt1g8rtRYliuNBaicgSbRJjuuuzvdbRGyRua+viraur8iidinz+FweLxq5r8MNhZXM4ZWjFs315l8tZwY7e5INLbHVVek6cfY</span><span class="se">\/</span><span class="s2">QK+CGDq+YCPmPYotd94kcSt3Qt8ZBy65W3S2OZ9eYxQ7bZ7c4LjVtbIBbUlIFUBUWgRoAAjTxIyIiJfj99QnRHIDk5lWt9R4Pirjes2Lk3dMrv39ziNI0ZGrSILBuo8assq8aILZIRPCifIr1Ztis1qxqyW</span><span class="se">\/</span><span class="s2">G7HCbh221RWoUOO2nQMsNAgNgP7IIoifxXn5zJ0Py4uHNLEOSHHXVNuypvFcfix2HLjdIbMZZQuS0Ns2nJTLpIgPivYqidqnyvSpXA7Tw31XuVOLu6g2Jr</span><span class="se">\/</span><span class="s2">AAHXeL3dxobpLhz2OnmgMTQTVuXKd8fIRXxAR8uulXpVSrS1TxtwfWnHG2capoLfMeas8i1XMnx8P65ZKuHKPpF7DzN5xRRFVRRURF+O6i7F+LvqA8Kr3eLTxOvOPbCwG6yymM2a9vMtGyap0hOA64ygueKCKmy6iH4ipCnSIOOWaVu71BuTTGgeWuwbfgTOFyXJLuHxIhRXJj7fw83G7Uxcd9vtUcN0</span><span class="se">\/</span><span class="s2">FsiNoTFTr2EslmteOWeBjtkgswrba4zUOHGaToGGGwQG2xT8IIiiJ+yVyNKUpSlKUpSlKUpSlKUpSlKUpSlKUpSlKUpSlTjv7gxp</span><span class="se">\/</span><span class="s2">kNsKxbXvN1yvE8vsCAjF5xaaxDkvK2SEyTpOMu9k2qfQSIJIi9KqogoNAwIr0KBFhyJ8me6w0DTkqQgI6+QiiK4aNiIIRKna+IiPar0iJ8V9tKUpSlKUpSlKUpSlKUpSlK</span><span class="se">\/</span><span class="s2">9k="</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span><span class="c1">// -&gt; Status Code: 200 OK</span><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"aa3f8586-a41a-4564-b3d3-7ffc0dd51776"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"external_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2964836b-e787-488f-a5e8-cc8bbb65822f"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"refunded"</span><span class="p">,</span><span class="w"> </span><span class="c1">// or canceled</span><span class="w">
+  </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-04-07 20:12:36"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>Retrieve a specific order.</p>
@@ -841,6 +864,42 @@ Attention! Our Order IDs are not integers anymore. Please save them as <b>string
 <td>NULL</td>
 <td>false</td>
 <td><strong>strongly recommended</strong> External ID to avoid duplicate orders (because of connection problems or similar)</td>
+</tr>
+</tbody></table>
+<h2 id='order-status'>Order Status</h2>
+<p>A new order placed via API / Frontend will have the status &quot;processing&quot;.</p>
+
+<p><code>GET /orders/{ID}</code> will only return keys if order status is <strong>done</strong> or <strong>delivered</strong>.</p>
+
+<table><thead>
+<tr>
+<th>Status</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>processing</td>
+<td>Order is being processed by the system.</td>
+</tr>
+<tr>
+<td>review</td>
+<td>Order was selected for a manual review.</td>
+</tr>
+<tr>
+<td>done</td>
+<td>Order was successfully processed. Waiting for customer to fetch keys.</td>
+</tr>
+<tr>
+<td>delivered</td>
+<td>Order was successfully delivered to the customer.</td>
+</tr>
+<tr>
+<td>canceled</td>
+<td>Order was canceled.<br>Reason: Order could not be executed</td>
+</tr>
+<tr>
+<td>refunded</td>
+<td>Order was (partially) refunded.<br>Reason: Problem with key(s) reported by customer</td>
 </tr>
 </tbody></table>
 <h1 id='merchant'>Merchant</h1><h2 id='get-balance'>Get Balance</h2><div class="highlight"><pre class="highlight php tab-php"><code><span class="nv">$api_client</span><span class="o">-&gt;</span><span class="nf">get</span><span class="p">(</span><span class="s1">'balance'</span><span class="p">);</span>
