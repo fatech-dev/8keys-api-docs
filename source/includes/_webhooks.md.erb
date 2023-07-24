@@ -1,0 +1,78 @@
+# Webhooks
+
+## Headers
+
+Each webhook from us will include these HTTP headers:
+
+Name | Value | Description
+---- | ----- | -----------
+Accept | application/json
+Content-Type | application/json
+X-Event-Name | one of: healthcheck, product_updates | Name of the event
+X-Event-Merchant | *UUID* | ID of your merchant (see **My Merchants**)
+X-Event-Secret | *string, 64 chars, alphanumeric* | Webhook Secret (see **Setup**)
+
+## Requirements
+
+You must provide us a HTTPS webhook url that accepts POST requests and responds with 200 or 204 status code. If your server does not respond with 200/204 status code, we will try once again after 30 seconds and finally discard the event if the request failed again.
+
+## Setup
+
+To setup webhooks, go to **My Merchants** and click on <%= image_tag "images/webhooks-btn.jpg" %> in the **Actions** column. There is a **webhook secret**, which will be included in every webhook from us for verification, and a **webhook url**, which points to a URL on your server that processes our webhooks.
+
+We recommend to frequently regenerate the **Webhook Secret**.
+
+<%= image_tag "images/webhooks-setup.jpg" %>
+
+## Events
+
+See the listed events on the right side.
+
+> **Healthcheck**
+
+```json-doc
+// The healthcheck event will be used to verify if the webhook works.
+// It is expected that the response includes the same token that was given by the request.
+
+// -- Request --
+// X-Event-Name: healthcheck
+{
+  "token": "73cZ9f0x4IrC0lmaMbNiP45awlQQVHtQ"
+}
+
+// -- Expected Response --
+// Status Code: 200 or 204
+{
+  "token": "73cZ9f0x4IrC0lmaMbNiP45awlQQVHtQ"
+}
+```
+
+> **Product Update**
+
+```json-doc
+// This event will be sent every 5 minutes with a list of
+// product updates (including products that went out of stock).
+
+// -- Request --
+// X-Event-Name: product_updates
+[
+  {
+    "id":12425,
+    "quantity":10,
+    "price":6.13,
+    "price_cents":613,
+    "updated_at":"2023-07-19 12:52:14"
+  },
+  {
+    "id":1228,
+    "quantity":0,
+    "price":0,
+    "price_cents":0,
+    "updated_at":"2023-07-19 12:55:25"
+  }
+]
+
+// -- Expected Response --
+// Status Code: 200 or 204
+// *Empty body*
+```

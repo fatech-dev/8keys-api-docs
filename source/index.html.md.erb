@@ -6,12 +6,13 @@ language_tabs: # must be one of https://git.io/vQNgJ
 
 toc_footers:
   - <a href='https://api.8keys.de/'>8keys API Developer Portal</a>
-  - <a href='https://8keys.de/'>Copyright (c) 2022 8keys</a>
+  - <a href='https://8keys.de/'>Copyright (c) 2023 8keys</a>
 
 includes:
   - products.md.erb
   - orders.md.erb
   - merchant.md.erb
+  - webhooks.md.erb
 
 search: true
 ---
@@ -29,7 +30,7 @@ General Information about the API:
 * Content-Type: `application/json` or `application/x-www-form-urlencoded` (we strongly recommend using json)
 * Response Format: `JSON`, make sure to add `Accept: application/json` to all your requests
 * Money Format: `Euro-Cents` as integer, e.g. 12972 for 129.72 EUR.
-* DateTime Format: `YYYY-MM-dd HH:mm:ss`, e.g. `2020-04-03 18:04:00`
+* DateTime Format: `YYYY-MM-dd HH:mm:ss`, e.g. `2020-04-03 18:04:00` (UTC timezone)
 
 Environments:
 
@@ -114,10 +115,11 @@ Error Code | Description
 
 ## Changelog
 
-Version | Notes
-------- | -------
-1.0.0 | Initial version
-1.0.1 | Added order external id and more descriptions
-1.0.2 | Changed Order IDs from integer (e.g. *12624*) to UUID (e.g. *61f501e1-3c47-4733-9fff-055678e73629*)<br>Please make sure your implementation saves our IDs as **string**/**UUID**<br><br>Switched from Store to Merchant<br>New sandbox/production endpoints<br>Fixed `Get Balance` Route<br>Made descriptions simpler
-1.0.3 | Fixed typos
-1.0.4 | Added Order Status + two order response examples
+Date       | Notes
+---------- | -------
+24.07.2023 | Added webhooks and 2 order status (canceling, refunding)
+26.10.2022 | Added Order Status + two order response examples
+25.10.2022 | Fixed typos
+25.10.2022 | Changed Order IDs from integer (e.g. *12624*) to UUID (e.g. *61f501e1-3c47-4733-9fff-055678e73629*)<br>Please make sure your implementation saves our IDs as **string**/**UUID**<br><br>Switched from Store to Merchant<br>New sandbox/production endpoints<br>Fixed `Get Balance` Route<br>Made descriptions simpler
+29.11.2021 | Added order external id and more descriptions
+07.06.2020 | Initial version
