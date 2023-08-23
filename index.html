@@ -404,7 +404,7 @@
 <ul>
 <li>Content-Type: <code>application/json</code> or <code>application/x-www-form-urlencoded</code> (we strongly recommend using json)</li>
 <li>Response Format: <code>JSON</code>, make sure to add <code>Accept: application/json</code> to all your requests</li>
-<li>Money Format: <code>Euro-Cents</code> as integer, e.g. 12972 for 129.72 EUR.</li>
+<li>Money Format: <code>Euro</code> as float (recommended) or <code>Euro-Cents</code> as integer (e.g. 12972 for 129.72 EUR)</li>
 <li>DateTime Format: <code>YYYY-MM-dd HH:mm:ss</code>, e.g. <code>2020-04-03 18:04:00</code> (UTC timezone)</li>
 </ul>
 
@@ -534,6 +534,10 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
 </tr>
 </thead><tbody>
 <tr>
+<td>23.08.2023</td>
+<td>Euro as decimal is now accepted at every endpoint (recommended). Euro cents as integer still works too.</td>
+</tr>
+<tr>
 <td>24.07.2023</td>
 <td>Added webhooks and 2 order status (canceling, refunding)</td>
 </tr>
@@ -584,6 +588,7 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
       </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"German, English, French, Spanish, Czech, Polish, Russian, Italian"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"region"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Region free"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">4129</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">6.15</span><span class="p">,</span><span class="w">
       </span><span class="nl">"price_cents"</span><span class="p">:</span><span class="w"> </span><span class="mi">615</span><span class="p">,</span><span class="w">
       </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-04-24 13:54:18"</span><span class="w">
     </span><span class="p">},</span><span class="w">
@@ -656,6 +661,7 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
     </span><span class="nl">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"German, English, French, Spanish, Czech, Polish, Russian, Italian"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"region"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Region free"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">4129</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">6.15</span><span class="p">,</span><span class="w">
     </span><span class="nl">"price_cents"</span><span class="p">:</span><span class="w"> </span><span class="mi">615</span><span class="p">,</span><span class="w">
     </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-04-24 13:54:18"</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -811,6 +817,11 @@ The product keys will only be included if the order status is <code>done</code>
   <span class="s1">'json'</span> <span class="o">=&gt;</span> <span class="p">[</span>
     <span class="s1">'products'</span> <span class="o">=&gt;</span> <span class="p">[</span>
       <span class="p">[</span>
+        <span class="s1">'product_id'</span> <span class="o">=&gt;</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="s1">'quantity'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s1">'price'</span> <span class="o">=&gt;</span> <span class="mf">2.99</span>
+      <span class="p">],</span>
+      <span class="p">[</span>
         <span class="s1">'product_id'</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">,</span>
         <span class="s1">'quantity'</span> <span class="o">=&gt;</span> <span class="mi">4</span><span class="p">,</span>
         <span class="s1">'price_cents'</span> <span class="o">=&gt;</span> <span class="mi">615</span>
@@ -873,10 +884,17 @@ Attention! Our Order IDs are not integers anymore. Please save them as <b>string
 <td>Desired Quantity (max. 50)</td>
 </tr>
 <tr>
+<td>products.*.price</td>
+<td>float</td>
+<td>-</td>
+<td>see notes</td>
+<td>Maximum price in euros</td>
+</tr>
+<tr>
 <td>products.*.price_cents</td>
 <td>int</td>
 <td>-</td>
-<td>true</td>
+<td>see notes</td>
 <td>Maximum price in cents</td>
 </tr>
 <tr>
@@ -887,6 +905,12 @@ Attention! Our Order IDs are not integers anymore. Please save them as <b>string
 <td><strong>strongly recommended</strong> External ID to avoid duplicate orders (because of connection problems or similar)</td>
 </tr>
 </tbody></table>
+
+<p><strong>Notes</strong></p>
+
+<ul>
+<li>For pricing, either <code>products.*.price</code> or <code>products.*.price_cents</code> is required. Do not provide both.</li>
+</ul>
 <h2 id='order-status'>Order Status</h2>
 <p>A new order placed via API / Frontend will have the status &quot;processing&quot;.</p>
 
