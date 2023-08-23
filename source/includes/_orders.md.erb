@@ -118,6 +118,11 @@ $api_client->post('orders', [
   'json' => [
     'products' => [
       [
+        'product_id' => 5,
+        'quantity' => 1,
+        'price' => 2.99
+      ],
+      [
         'product_id' => 1,
         'quantity' => 4,
         'price_cents' => 615
@@ -160,8 +165,13 @@ Parameter | Type | Default | Required | Description
 products | array of products | - | true | Requested products
 products.*.product_id | int | - | true | Product ID
 products.*.quantity | int | - | true | Desired Quantity (max. 50)
-products.*.price_cents | int | - | true | Maximum price in cents
+products.*.price | float | - | see notes | Maximum price in euros
+products.*.price_cents | int | - | see notes | Maximum price in cents
 external_id | string (max. 64 chars) | NULL | false | **strongly recommended** External ID to avoid duplicate orders (because of connection problems or similar)
+
+**Notes**
+
+- For pricing, either `products.*.price` or `products.*.price_cents` is required. Do not provide both.
 
 ## Order Status
 

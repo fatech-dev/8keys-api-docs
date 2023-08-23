@@ -29,7 +29,7 @@ General Information about the API:
 
 * Content-Type: `application/json` or `application/x-www-form-urlencoded` (we strongly recommend using json)
 * Response Format: `JSON`, make sure to add `Accept: application/json` to all your requests
-* Money Format: `Euro-Cents` as integer, e.g. 12972 for 129.72 EUR.
+* Money Format: `Euro` as float (recommended) or `Euro-Cents` as integer (e.g. 12972 for 129.72 EUR)
 * DateTime Format: `YYYY-MM-dd HH:mm:ss`, e.g. `2020-04-03 18:04:00` (UTC timezone)
 
 Environments:
@@ -117,6 +117,7 @@ Error Code | Description
 
 Date       | Notes
 ---------- | -------
+23.08.2023 | Euro as decimal is now accepted at every endpoint (recommended). Euro cents as integer still works too.
 24.07.2023 | Added webhooks and 2 order status (canceling, refunding)
 26.10.2022 | Added Order Status + two order response examples
 25.10.2022 | Fixed typos
