@@ -81,15 +81,7 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
 
 ## Rate Limit
 
-To protect our servers from too many requests, we have a rate limit of **120 requests per minute** (production) and **60 requests per minute** (sandbox). The rate limit applies to each environment separately.
-
-You can check the current rate limit status with response headers:
-
-`x-ratelimit-limit: 60` and `x-ratelimit-remaining: 34`
-
-If you hit the rate limit, following requests will be blocked with `429 Too Many Requests` and you can use the following response header to check when the rate limit is reset (UNIX Timestamp):
-
-`x-ratelimit-reset: 1591463645`
+To protect our servers from too many requests, we have a rate limit of **5 requests per second per ip address**. If you hit the rate limit, following requests will be blocked with `429 Too Many Requests`.
 
 ## Product-Key Types
 
@@ -117,6 +109,7 @@ Error Code | Description
 
 Date       | Notes
 ---------- | -------
+06.04.2024 | Increased rate limit to 5 requests per second per ip address
 23.08.2023 | Euro as decimal is now accepted at every endpoint (recommended). Euro cents as integer still works too.
 24.07.2023 | Added webhooks and 2 order status (canceling, refunding)
 26.10.2022 | Added Order Status + two order response examples
