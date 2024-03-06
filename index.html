@@ -456,15 +456,7 @@
 You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
 </aside>
 <h2 id='rate-limit'>Rate Limit</h2>
-<p>To protect our servers from too many requests, we have a rate limit of <strong>120 requests per minute</strong> (production) and <strong>60 requests per minute</strong> (sandbox). The rate limit applies to each environment separately.</p>
-
-<p>You can check the current rate limit status with response headers:</p>
-
-<p><code>x-ratelimit-limit: 60</code> and <code>x-ratelimit-remaining: 34</code></p>
-
-<p>If you hit the rate limit, following requests will be blocked with <code>429 Too Many Requests</code> and you can use the following response header to check when the rate limit is reset (UNIX Timestamp):</p>
-
-<p><code>x-ratelimit-reset: 1591463645</code></p>
+<p>To protect our servers from too many requests, we have a rate limit of <strong>5 requests per second per ip address</strong>. If you hit the rate limit, following requests will be blocked with <code>429 Too Many Requests</code>.</p>
 <h2 id='product-key-types'>Product-Key Types</h2>
 <p>We use <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types/Common_types">MIME Types</a> to describe the format of our product keys.</p>
 
@@ -533,6 +525,10 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
 <th>Notes</th>
 </tr>
 </thead><tbody>
+<tr>
+<td>06.04.2024</td>
+<td>Increased rate limit to 5 requests per second per ip address</td>
+</tr>
 <tr>
 <td>23.08.2023</td>
 <td>Euro as decimal is now accepted at every endpoint (recommended). Euro cents as integer still works too.</td>
