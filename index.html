@@ -285,7 +285,7 @@
     </style>
     <link href="stylesheets/screen-9f4a4382.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print-966d6edc.css" rel="stylesheet" media="print" />
-      <script src="javascripts/all-b12a2749.js"></script>
+      <script src="javascripts/all-024da600.js"></script>
 
   </head>
 
@@ -365,23 +365,6 @@
               <ul class="toc-list-h2">
                   <li>
                     <a href="#get-balance" class="toc-h2 toc-link" data-title="Get Balance">Get Balance</a>
-                  </li>
-              </ul>
-          </li>
-          <li>
-            <a href="#webhooks" class="toc-h1 toc-link" data-title="Webhooks">Webhooks</a>
-              <ul class="toc-list-h2">
-                  <li>
-                    <a href="#headers" class="toc-h2 toc-link" data-title="Headers">Headers</a>
-                  </li>
-                  <li>
-                    <a href="#requirements" class="toc-h2 toc-link" data-title="Requirements">Requirements</a>
-                  </li>
-                  <li>
-                    <a href="#setup" class="toc-h2 toc-link" data-title="Setup">Setup</a>
-                  </li>
-                  <li>
-                    <a href="#events" class="toc-h2 toc-link" data-title="Events">Events</a>
                   </li>
               </ul>
           </li>
@@ -525,6 +508,10 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
 <th>Notes</th>
 </tr>
 </thead><tbody>
+<tr>
+<td>11.08.2025</td>
+<td>Removed webhooks</td>
+</tr>
 <tr>
 <td>06.04.2024</td>
 <td>Increased rate limit to 5 requests per second per ip address</td>
@@ -968,100 +955,7 @@ Attention! Our Order IDs are not integers anymore. Please save them as <b>string
 <p><code>GET /balance</code></p>
 <h3 id='query-parameters'>Query Parameters</h3>
 <p>No parameters available.</p>
-<h1 id='webhooks'>Webhooks</h1><h2 id='headers'>Headers</h2>
-<p>Each webhook from us will include these HTTP headers:</p>
 
-<table><thead>
-<tr>
-<th>Name</th>
-<th>Value</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>Accept</td>
-<td>application/json</td>
-<td></td>
-</tr>
-<tr>
-<td>Content-Type</td>
-<td>application/json</td>
-<td></td>
-</tr>
-<tr>
-<td>X-Event-Name</td>
-<td>one of: healthcheck, product_updates</td>
-<td>Name of the event</td>
-</tr>
-<tr>
-<td>X-Event-Merchant</td>
-<td><em>UUID</em></td>
-<td>ID of your merchant (see <strong>My Merchants</strong>)</td>
-</tr>
-<tr>
-<td>X-Event-Secret</td>
-<td><em>string, 64 chars, alphanumeric</em></td>
-<td>Webhook Secret (see <strong>Setup</strong>)</td>
-</tr>
-</tbody></table>
-<h2 id='requirements'>Requirements</h2>
-<p>You must provide us a HTTPS webhook url that accepts POST requests and responds with 200 or 204 status code. If your server does not respond with 200/204 status code, we will try once again after 30 seconds and finally discard the event if the request failed again.</p>
-<h2 id='setup'>Setup</h2>
-<p>To setup webhooks, go to <strong>My Merchants</strong> and click on <img src="images/webhooks-btn-fd6192bb.jpg" alt="" /> in the <strong>Actions</strong> column. There is a <strong>webhook secret</strong>, which will be included in every webhook from us for verification, and a <strong>webhook url</strong>, which points to a URL on your server that processes our webhooks.</p>
-
-<p>We recommend to frequently regenerate the <strong>Webhook Secret</strong>.</p>
-
-<p><img src="images/webhooks-setup-9b8a97cc.jpg" alt="" /></p>
-<h2 id='events'>Events</h2>
-<p>See the listed events on the right side.</p>
-
-<blockquote>
-<p><strong>Healthcheck</strong></p>
-</blockquote>
-<div class="highlight"><pre class="highlight json-doc tab-json-doc"><code><span class="c1">// The healthcheck event will be used to verify if the webhook works.</span><span class="w">
-</span><span class="c1">// It is expected that the response includes the same token that was given by the request.</span><span class="w">
-
-</span><span class="c1">// -- Request --</span><span class="w">
-</span><span class="c1">// X-Event-Name: healthcheck</span><span class="w">
-</span><span class="p">{</span><span class="w">
-  </span><span class="nl">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"73cZ9f0x4IrC0lmaMbNiP45awlQQVHtQ"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-
-</span><span class="c1">// -- Expected Response --</span><span class="w">
-</span><span class="c1">// Status Code: 200 or 204</span><span class="w">
-</span><span class="p">{</span><span class="w">
-  </span><span class="nl">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"73cZ9f0x4IrC0lmaMbNiP45awlQQVHtQ"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div>
-<blockquote>
-<p><strong>Product Update</strong></p>
-</blockquote>
-<div class="highlight"><pre class="highlight json-doc tab-json-doc"><code><span class="c1">// This event will be sent every 5 minutes with a list of</span><span class="w">
-</span><span class="c1">// product updates (including products that went out of stock).</span><span class="w">
-
-</span><span class="c1">// -- Request --</span><span class="w">
-</span><span class="c1">// X-Event-Name: product_updates</span><span class="w">
-</span><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="mi">12425</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"quantity"</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"price"</span><span class="p">:</span><span class="mf">6.13</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"price_cents"</span><span class="p">:</span><span class="mi">613</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="s2">"2023-07-19 12:52:14"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"id"</span><span class="p">:</span><span class="mi">1228</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"quantity"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"price"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"price_cents"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"updated_at"</span><span class="p">:</span><span class="s2">"2023-07-19 12:55:25"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-
-</span><span class="c1">// -- Expected Response --</span><span class="w">
-</span><span class="c1">// Status Code: 200 or 204</span><span class="w">
-</span><span class="c1">// *Empty body*</span><span class="w">
-</span></code></pre></div>
       </div>
       <div class="dark-box">
           <div class="lang-selector">
