@@ -6,7 +6,7 @@ language_tabs: # must be one of https://git.io/vQNgJ
 
 toc_footers:
   - <a href='https://api.8keys.de/'>8keys API Developer Portal</a>
-  - <a href='https://8keys.de/'>Copyright (c) 2023 8keys</a>
+  - <a href='https://8keys.de/'>Copyright (c) 8keys</a>
 
 includes:
   - products.md.erb
@@ -29,7 +29,7 @@ General Information about the API:
 
 * Content-Type: `application/json` or `application/x-www-form-urlencoded` (we strongly recommend using json)
 * Response Format: `JSON`, make sure to add `Accept: application/json` to all your requests
-* Money Format: `Euro` as float (recommended) or `Euro-Cents` as integer (e.g. 12972 for 129.72 EUR)
+* Money Format: `Euro` as decimal or `Euro-Cents` as integer (e.g. 12972 for 129.72 EUR)
 * DateTime Format: `YYYY-MM-dd HH:mm:ss`, e.g. `2020-04-03 18:04:00` (UTC timezone)
 
 Environments:
@@ -49,11 +49,11 @@ Production | Live environment for productive use with real balance which can be 
 
 ## Authentication
 
-### Generate API keys
+### Generate API Tokens
 
-To generate your API keys, go to **My Merchants** and click on <%= image_tag "images/key-btn.png" %> in the **Actions** column. Confirm the procedure and make sure to save your api keys! We recommend to frequently regenerate your API keys.
+You can generate your API tokens by opening the **API Tokens** section in the left navigation bar. Click on **+ New API Token**, fill in the form and click **Save**.
 
-<%= image_tag "images/api-keys.png" %>
+The generated api token will only be shown once, so make sure to copy it and save it in a secure place. If you lose your api token, you can generate a new one at any time. We recommend to frequently regenerate your API tokens.
 
 ### Authorization
 
@@ -65,18 +65,18 @@ $api_client = new \GuzzleHttp\Client([
     'timeout'  => 60.0,
     'http_errors' => false,
     'headers'  => [
-        'Authorization' => 'Bearer EXAMPLE-API-KEY',
+        'Authorization' => 'Bearer 8k_sandbox_…',
         'Accept' => 'application/json',
         'Content-Type' => 'application/json'
     ],
 ]);
 ```
-The API key must be included in all API requests to the server in a header that looks like the following:
+The API token must be included in all API requests to the server in a header that looks like the following:
 
-`Authorization: Bearer EXAMPLE-API-KEY`
+`Authorization: Bearer 8k_sandbox_…`
 
 <aside class="notice">
-You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
+You must replace <code>8k_sandbox_…</code> with your personal API token depending on the environment you are using.
 </aside>
 
 ## Rate Limit
@@ -109,6 +109,7 @@ Error Code | Description
 
 Date       | Notes
 ---------- | -------
+26.11.2026 | Updated api tokens
 11.08.2025 | Removed webhooks
 06.04.2024 | Increased rate limit to 5 requests per second per ip address
 23.08.2023 | Euro as decimal is now accepted at every endpoint (recommended). Euro cents as integer still works too.

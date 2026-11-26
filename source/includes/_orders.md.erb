@@ -165,7 +165,7 @@ Parameter | Type | Default | Required | Description
 products | array of products | - | true | Requested products
 products.*.product_id | int | - | true | Product ID
 products.*.quantity | int | - | true | Desired Quantity (max. 50)
-products.*.price | float | - | see notes | Maximum price in euros
+products.*.price | decimal | - | see notes | Maximum price in euros
 products.*.price_cents | int | - | see notes | Maximum price in cents
 external_id | string (max. 64 chars) | NULL | false | **strongly recommended** External ID to avoid duplicate orders (because of connection problems or similar)
 
