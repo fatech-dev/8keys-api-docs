@@ -371,7 +371,7 @@
       </ul>
         <ul class="toc-footer">
             <li><a href='https://api.8keys.de/'>8keys API Developer Portal</a></li>
-            <li><a href='https://8keys.de/'>Copyright (c) 2023 8keys</a></li>
+            <li><a href='https://8keys.de/'>Copyright (c) 8keys</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -387,7 +387,7 @@
 <ul>
 <li>Content-Type: <code>application/json</code> or <code>application/x-www-form-urlencoded</code> (we strongly recommend using json)</li>
 <li>Response Format: <code>JSON</code>, make sure to add <code>Accept: application/json</code> to all your requests</li>
-<li>Money Format: <code>Euro</code> as float (recommended) or <code>Euro-Cents</code> as integer (e.g. 12972 for 129.72 EUR)</li>
+<li>Money Format: <code>Euro</code> as decimal or <code>Euro-Cents</code> as integer (e.g. 12972 for 129.72 EUR)</li>
 <li>DateTime Format: <code>YYYY-MM-dd HH:mm:ss</code>, e.g. <code>2020-04-03 18:04:00</code> (UTC timezone)</li>
 </ul>
 
@@ -412,10 +412,10 @@
 <p><code>https://api.8keys.de/sandbox/v1</code></p>
 <h3 id='production'>Production</h3>
 <p><code>https://api.8keys.de/production/v1</code></p>
-<h2 id='authentication'>Authentication</h2><h3 id='generate-api-keys'>Generate API keys</h3>
-<p>To generate your API keys, go to <strong>My Merchants</strong> and click on <img src="images/key-btn-6125194c.png" alt="" /> in the <strong>Actions</strong> column. Confirm the procedure and make sure to save your api keys! We recommend to frequently regenerate your API keys.</p>
+<h2 id='authentication'>Authentication</h2><h3 id='generate-api-tokens'>Generate API Tokens</h3>
+<p>You can generate your API tokens by opening the <strong>API Tokens</strong> section in the left navigation bar. Click on <strong>+ New API Token</strong>, fill in the form and click <strong>Save</strong>. We <strong>strongly</strong> recommend enabling <strong>IP Whitelist</strong> for production environment.</p>
 
-<p><img src="images/api-keys-4f7a2e36.png" alt="" /></p>
+<p>The generated api token will only be shown once, so make sure to copy it and save it in a secure place. If you lose your api token, you can generate a new one at any time. We recommend to frequently regenerate your API tokens.</p>
 <h3 id='authorization'>Authorization</h3>
 <blockquote>
 <p>Client implementation (used in the following code examples)</p>
@@ -425,18 +425,18 @@
     <span class="s1">'timeout'</span>  <span class="o">=&gt;</span> <span class="mf">60.0</span><span class="p">,</span>
     <span class="s1">'http_errors'</span> <span class="o">=&gt;</span> <span class="kc">false</span><span class="p">,</span>
     <span class="s1">'headers'</span>  <span class="o">=&gt;</span> <span class="p">[</span>
-        <span class="s1">'Authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Bearer EXAMPLE-API-KEY'</span><span class="p">,</span>
+        <span class="s1">'Authorization'</span> <span class="o">=&gt;</span> <span class="s1">'Bearer 8k_sandbox_…'</span><span class="p">,</span>
         <span class="s1">'Accept'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span><span class="p">,</span>
         <span class="s1">'Content-Type'</span> <span class="o">=&gt;</span> <span class="s1">'application/json'</span>
     <span class="p">],</span>
 <span class="p">]);</span>
 </code></pre></div>
-<p>The API key must be included in all API requests to the server in a header that looks like the following:</p>
+<p>The API token must be included in all API requests to the server in a header that looks like the following:</p>
 
-<p><code>Authorization: Bearer EXAMPLE-API-KEY</code></p>
+<p><code>Authorization: Bearer 8k_sandbox_…</code></p>
 
 <aside class="notice">
-You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
+You must replace <code>8k_sandbox_…</code> with your personal API token depending on the environment you are using.
 </aside>
 <h2 id='rate-limit'>Rate Limit</h2>
 <p>To protect our servers from too many requests, we have a rate limit of <strong>5 requests per second per ip address</strong>. If you hit the rate limit, following requests will be blocked with <code>429 Too Many Requests</code>.</p>
@@ -508,6 +508,10 @@ You must replace <code>EXAMPLE-API-KEY</code> with your personal API key.
 <th>Notes</th>
 </tr>
 </thead><tbody>
+<tr>
+<td>26.11.2026</td>
+<td>Updated api tokens</td>
+</tr>
 <tr>
 <td>11.08.2025</td>
 <td>Removed webhooks</td>
@@ -936,7 +940,7 @@ Attention! Our Order IDs are not integers anymore. Please save them as <b>string
 </tr>
 <tr>
 <td>products.*.price</td>
-<td>float</td>
+<td>decimal</td>
 <td>-</td>
 <td>see notes</td>
 <td>Maximum price in euros</td>
